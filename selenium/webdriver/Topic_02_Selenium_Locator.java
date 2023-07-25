@@ -1,16 +1,15 @@
 package webdriver;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_01_Check_Environment {
+import java.util.concurrent.TimeUnit;
+
+public class Topic_02_Selenium_Locator {
+
     WebDriver driver;
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");
@@ -33,17 +32,18 @@ public class Topic_01_Check_Environment {
 
     @Test
     public void TC_01_Url() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.facebook.com/");
+
+
     }
 
     @Test
     public void TC_02_Logo() {
-        Assert.assertTrue(driver.findElement(By.cssSelector("img.fb_logo")).isDisplayed());
+
     }
 
     @Test
     public void TC_03_Form() {
-        Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
+
     }
 
     @AfterClass
