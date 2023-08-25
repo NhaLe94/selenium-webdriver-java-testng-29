@@ -63,7 +63,7 @@ public class Topic_02_Selenium_Locator {
 
     @Test
     public void TC_06_Partial_LinkText() {
-        //chỉ cần lấy 1 đoạn(đầu-giữa-cuối), độ chnh xác k cao
+        //chỉ cần lấy 1 đoạn(đầu-giữa-cuối), độ chinh xác k cao
         driver.findElements(By.partialLinkText("Apply for"));
         driver.findElements(By.partialLinkText("Apply for vendor"));
         driver.findElements(By.partialLinkText("vendor account"));
