@@ -12,10 +12,11 @@ public class RegisterPage {
     }
 
     By txtFirstName  = By.id("txtFirstname");
-    By errorFirstName = By.id("txtFirstname-error");
+    By errorEmptyFirstName = By.id("txtFirstname-error");
     By txtEmail = By.id("txtEmail");
 
     By errorEmail = By.id("txtEmail-error");
+
     By txtCEmail = By.id("txtCEmail");
     By errorCEmail = By.id("txtCEmail-error");
     By txtPassword = By.id("txtPassword");
@@ -28,26 +29,36 @@ public class RegisterPage {
     By btnSignUp = By.xpath("//button[text()='ĐĂNG KÝ' and @type='submit']");
 
     public void enterFirstName(String strFirstName){
-        driver.findElement(txtFirstName).sendKeys("Lucy Le");
+        driver.findElement(txtFirstName).sendKeys(strFirstName);
     }
-    public void enterInvaildEmail(String strInvalidEmail){
-        driver.findElement(txtEmail).sendKeys("lucyle90@@gmail.com");
+    public void enterEmail(String strEmail){
+        driver.findElement(txtEmail).sendKeys(strEmail);
     }
 
     public void enterConfirmEmail(String strConfirmEmail){
-        driver.findElement(txtCEmail).sendKeys("lucyle90@gmail.com");
+        driver.findElement(txtCEmail).sendKeys(strConfirmEmail);
     }
     public void enterPassword(String strPassword){
-        driver.findElement(txtPassword).sendKeys("123456");
+        driver.findElement(txtPassword).sendKeys(strPassword);
     }
     public void enterConfirmPassword(String strConfirmPassword){
-        driver.findElement(txtCPassword).sendKeys("123456");
+        driver.findElement(txtCPassword).sendKeys(strConfirmPassword);
     }
     public void enterPhone(String strPhone){
-        driver.findElement(txtPhone).sendKeys("0987654321");
+        driver.findElement(txtPhone).sendKeys(strPhone);
     }
-    public void clickSignUp(String strSignUp){
+    public void clickSignUp(){
         driver.findElement(btnSignUp).click();
+    }
+
+    public String verifyErrorEmail()
+    {
+        return driver.findElement(errorEmail).getText();
+    }
+
+    public String verifyErrorCEmail()
+    {
+        return driver.findElement(errorCEmail).getText();
     }
 
 
