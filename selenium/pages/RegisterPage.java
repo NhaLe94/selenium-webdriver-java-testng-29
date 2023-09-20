@@ -60,6 +60,23 @@ public class RegisterPage {
     {
         return driver.findElement(errorCEmail).getText();
     }
+    public String verifyErrorPassword()
+    {
+        return driver.findElement(errorPassword).getText();
+    }
+    public String verifyErrorCPassword()
+    {
+        return driver.findElement(errorCPassword).getText();
+    }
+
+
+    public String verifyErrorPhone()
+    {
+        return driver.findElement(errorPhone).getText();
+    }
+
+
+
 
 
 }
