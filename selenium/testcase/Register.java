@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Register {
     WebDriver driver;
-    public RegisterPage registerPage ;
+    public RegisterPage registerPage;
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");
 
@@ -34,17 +34,15 @@ public class Register {
     }
 
     @Test
-    public void Register_01_Empty_Data(){
+    public void Register_01_Empty_Data() {
         registerPage = new RegisterPage(driver);
 
         registerPage.clickSignUp();
 
-        // Verify
-
     }
 
     @Test
-    public void Register_02_Invalid_Email_Address(){
+    public void Register_02_Invalid_Email_Address() {
         registerPage = new RegisterPage(driver);
 
         registerPage.enterFirstName("Lucy Le");
@@ -56,9 +54,7 @@ public class Register {
         registerPage.clickSignUp();
         // Verify
         Assert.assertTrue(registerPage.verifyErrorEmail().contains("Vui lòng nhập email hợp lệ"));
-        Assert.assertTrue(registerPage.verifyErrorEmail().contains("Email nhập lại không đúng"));
-
+        Assert.assertTrue(registerPage.verifyErrorCEmail().contains("Email nhập lại không đúng"));
 
     }
-
 }
