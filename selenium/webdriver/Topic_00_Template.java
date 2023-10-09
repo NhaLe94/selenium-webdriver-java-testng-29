@@ -18,7 +18,7 @@ public class Topic_00_Template {
 
     @BeforeClass
     public void beforeClass() {
-        // test jkjkhjk
+
         if (osName.contains("Windows")) {
             System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
         } else {
@@ -51,4 +51,6 @@ public class Topic_00_Template {
     public void afterClass() {
         driver.quit();
     }
+
+
 }
