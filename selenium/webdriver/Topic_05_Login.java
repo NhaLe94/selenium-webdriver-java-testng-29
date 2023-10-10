@@ -79,6 +79,20 @@ public class Topic_05_Login {
 
 
     }
+    @Test
+    public void TC_04_Page_Source(){
+        driver.get("http://live.techpanda.org/index.php/");
+        driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+        sleepSeconds(3);
+        Assert.assertEquals(driver.getTitle(), "Customer Login");
+        Assert.assertTrue(driver.getPageSource().contains("Login or Create an Account"));
+
+        driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
+        sleepSeconds(3);
+
+        Assert.assertEquals(driver.getTitle(),"Create New Customer Account" );
+
+    }
 
     @AfterClass
     public void afterClass() {
