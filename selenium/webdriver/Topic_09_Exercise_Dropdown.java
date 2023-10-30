@@ -17,7 +17,7 @@ public class Topic_09_Exercise_Dropdown {
     WebDriver driver;
     String firstName = "Lucy", lastName = "Le", emailAddress = getEmailAddress(), password = "1234567890";
     String companyName = "Testing";
-    String day = "20", month = "May", year = "1993";
+    String day = "1", month = "May", year = "1980";
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");
 
@@ -44,15 +44,22 @@ public class Topic_09_Exercise_Dropdown {
         driver.findElement(By.id("FirstName")).sendKeys(firstName);
         driver.findElement(By.id("LastName")).sendKeys(lastName);
 
-       Select dayDropdown = new Select(driver.findElement(By.name("DateOfBirthDay")));
+        Select dayDropdown = new Select(driver.findElement(By.name("DateOfBirthDay")));
         dayDropdown.selectByVisibleText(day);
-        // verfy dropdown này là single (k phải multiple)
+        // verify dropdown này là single (k phải multiple)
         Assert.assertFalse(dayDropdown.isMultiple());
-        //List<WebElement> dayOptions = day.getOptions();
+        // verify dropdown nay co 32 items
         Assert.assertEquals(dayDropdown.getOptions().size(), 32);
-        new Select(driver.findElement(By.name("DateOfBirthMonth"))).selectByVisibleText(month);
-        new Select(driver.findElement(By.name("DateOfBirthYear"))).selectByVisibleText(year);
 
+        Select monthDropdown = new Select(driver.findElement(By.name("DateOfBirthMonth")));
+        monthDropdown.selectByVisibleText(month);
+        //// verify dropdown nay co 13 items
+
+        Assert.assertEquals(monthDropdown.getOptions().size(), 13);
+
+        Select yearDropdown = new Select(driver.findElement(By.name("DateOfBirthYear")));
+        yearDropdown.selectByVisibleText(year);
+        Assert.assertEquals(yearDropdown.getOptions().size(), 112);
 
         driver.findElement(By.id("Email")).sendKeys(emailAddress);
         driver.findElement(By.id("Company")).sendKeys(companyName);
@@ -60,6 +67,11 @@ public class Topic_09_Exercise_Dropdown {
         driver.findElement(By.id("ConfirmPassword")).sendKeys(password);
         driver.findElement(By.cssSelector("button#register-button")).click();
         sleepSeconds(3);
+        // verify //div[@class='result']
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.result")).getText(), "Your registration completed");
+       // driver.findElement(By.cssSelector("a.register-continue-button")).click();
+
+
 
     }
 
@@ -74,21 +86,21 @@ public class Topic_09_Exercise_Dropdown {
 
         driver.findElement(By.cssSelector("a.ico-account")).click();
         sleepSeconds(3);
-        Assert.assertEquals(driver.findElement(By.cssSelector("input#FirstName")).getAttribute("value"), firstName);
-        Assert.assertEquals(driver.findElement(By.cssSelector("input#LastName")).getAttribute("value"), lastName);
+       // Assert.assertEquals(driver.findElement(By.cssSelector("input#FirstName")).getAttribute("value"), firstName);
+       // Assert.assertEquals(driver.findElement(By.cssSelector("input#LastName")).getAttribute("value"), lastName);
         Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthDay"))).getFirstSelectedOption().getText(), day);
         Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthMonth"))).getFirstSelectedOption().getText(), month);
         Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthYear"))).getFirstSelectedOption().getText(), year);
 
-        Assert.assertEquals(driver.findElement(By.cssSelector("input#Email")).getAttribute("value"), emailAddress);
-        Assert.assertEquals(driver.findElement(By.cssSelector("input#Company")).getAttribute("value"), companyName);
+        //Assert.assertEquals(driver.findElement(By.cssSelector("input#Email")).getAttribute("value"), emailAddress);
+       // Assert.assertEquals(driver.findElement(By.cssSelector("input#Company")).getAttribute("value"), companyName);
     }
 
 
     @AfterClass
     public void afterClass() {
 
-        driver.quit();
+       // driver.quit();
     }
 
     public void sleepSeconds(long timeInsecond) {

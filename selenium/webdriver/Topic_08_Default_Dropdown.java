@@ -19,7 +19,7 @@ public class Topic_08_Default_Dropdown {
     WebDriver driver;
     String firstName = "Lucy", lastName = "Le", emailAddress = getEmailAddress(), password = "1234567890";
     String companyName = "Testing";
-    String day = "20", month = "May", year = "1993";
+    String day = "1", month = "May", year = "1980";
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");
 
@@ -53,6 +53,7 @@ public class Topic_08_Default_Dropdown {
         //List<WebElement> dayOptions = day.getOptions();
         Assert.assertEquals(dayDropdown.getOptions().size(), 32);
         new Select(driver.findElement(By.name("DateOfBirthMonth"))).selectByVisibleText(month);
+
         new Select(driver.findElement(By.name("DateOfBirthYear"))).selectByVisibleText(year);
 
 
