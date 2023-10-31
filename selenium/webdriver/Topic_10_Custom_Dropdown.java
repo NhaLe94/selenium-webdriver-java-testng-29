@@ -39,18 +39,17 @@ public class Topic_10_Custom_Dropdown {
     @Test
     public void TC_01() {
         driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
-        driver.findElement(By.cssSelector("span#number-button")).click();
+        selectItemInDropdown("span#speed-button","ul#speed-menu div","Slow");
         sleepSeconds(3);
-        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("ul#number-menu div")));
-        List<WebElement> allItem = driver.findElements(By.cssSelector("ul#number-menu div"));
-        for (WebElement item: allItem){
-            String textItem = item.getText();
-            System.out.println("Text item = " + textItem);
-            if (textItem.equals("8")){
-                item.click();
-                break;
-            }
-        }
+
+        selectItemInDropdown("span#files-button","ul#files-menu div","ui.jQuery.js");
+        sleepSeconds(3);
+
+        selectItemInDropdown("span#number-button","ul#number-menu div","10");
+        sleepSeconds(3);
+
+        selectItemInDropdown("span#salutation-button","ul#salutation-menu div","Mr.");
+        sleepSeconds(3);
     }
 
     @AfterClass
@@ -62,6 +61,20 @@ public class Topic_10_Custom_Dropdown {
             Thread.sleep(timeInsecond *1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public void selectItemInDropdown(String parentCss, String childItemCss, String iTemTextExpected){
+        driver.findElement(By.cssSelector(parentCss)).click();
+        sleepSeconds(3);
+        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childItemCss)));
+        List<WebElement> allItem = driver.findElements(By.cssSelector(childItemCss));
+        for (WebElement item: allItem){
+            String textItem = item.getText();
+          //  System.out.println("Text item = " + textItem);
+            if (textItem.equals(iTemTextExpected)){
+                item.click();
+                break;
+            }
         }
     }
 }
