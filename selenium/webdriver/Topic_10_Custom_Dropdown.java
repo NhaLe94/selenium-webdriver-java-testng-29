@@ -1,22 +1,29 @@
 package webdriver;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_01_Check_Environment {
+import java.time.Duration;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class Topic_10_Custom_Dropdown {
     WebDriver driver;
+    WebDriverWait explicitWait;
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");
 
     @BeforeClass
     public void beforeClass() {
+
         if (osName.contains("Windows")) {
             System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
         } else {
@@ -24,25 +31,26 @@ public class Topic_01_Check_Environment {
         }
 
         driver = new FirefoxDriver();
+        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
+
     }
 
     @Test
-    public void TC_01_Url() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.facebook.com/");
-    }
-
-    @Test
-    public void TC_02_Logo() {
-        Assert.assertTrue(driver.findElement(By.cssSelector("img.fb_logo")).isDisplayed());
-    }
-
-    @Test
-    public void TC_03_Form() {
-        Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
+    public void TC_01() {
+        driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
+        driver.findElement(By.cssSelector("span#number-button")).click();
+        sleepSeconds(3);
+        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("ul#number-menu div")));
+        List<WebElement> allItem = driver.findElements(By.cssSelector("ul#number-menu div"));
+        for (WebElement item: allItem){
+            String textItem = item.getText();
+            System.out.println("Text item = " + textItem);
+            if (textItem.equals("8")){
+                item.click();
+                break;
+            }
+        }
     }
 
     @AfterClass
