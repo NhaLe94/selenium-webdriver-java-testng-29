@@ -52,6 +52,72 @@ public class Topic_10_Custom_Dropdown {
         sleepSeconds(3);
     }
 
+    @Test
+    public void TC_02() {
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+        selectItemInDropdown("i.dropdown.icon","div.item>span.text","Christian");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(), "Christian");
+        sleepSeconds(3);
+
+        selectItemInDropdown("i.dropdown.icon","div.item>span.text","Jenny Hess");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(), "Jenny Hess");
+        sleepSeconds(3);
+
+        selectItemInDropdown("i.dropdown.icon","div.item>span.text","Matt");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(), "Matt");
+        sleepSeconds(3);
+
+    }
+    @Test
+    public void TC_03() {
+        driver.get("https://mikerodham.github.io/vue-dropdowns/");
+        selectItemInDropdown("li.dropdown-toggle","ul.dropdown-menu a","Second Option");
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(), "Second Option");
+        sleepSeconds(3);
+
+        selectItemInDropdown("li.dropdown-toggle","ul.dropdown-menu a","First Option");
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(), "First Option");
+        sleepSeconds(3);
+
+        selectItemInDropdown("li.dropdown-toggle","ul.dropdown-menu a","Third Option");
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(), "Third Option");
+        sleepSeconds(3);
+
+    }
+
+    @Test
+    public void TC_04_Editable() {
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
+        selectItemInEditableDropdown("input.search","div.item span","Algeria");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(), "Algeria");
+        sleepSeconds(3);
+
+        selectItemInEditableDropdown("input.search","div.item span","Australia");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(), "Australia");
+        sleepSeconds(3);
+
+        selectItemInEditableDropdown("input.search","div.item span","Belgium");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider.text")).getText(), "Belgium");
+        sleepSeconds(3);
+
+    }
+
+    @Test
+    public void TC_05_NopCommerce() {
+        driver.get("https://demo.nopcommerce.com/register");
+        selectItemInDropdown("select[name='DateOfBirthDay']","select[name='DateOfBirthDay']>option","18");
+        Assert.assertTrue(driver.findElement(By.cssSelector("select[name='DateOfBirthDay']>option[value='18']")).isSelected());
+        sleepSeconds(3);
+
+        selectItemInDropdown("select[name='DateOfBirthMonth']","select[name='DateOfBirthMonth']>option","September");
+        Assert.assertTrue(driver.findElement(By.cssSelector("select[name='DateOfBirthMonth']>option[value='9']")).isSelected());
+        sleepSeconds(3);
+
+        selectItemInDropdown("select[name='DateOfBirthYear']","select[name='DateOfBirthYear']>option","1995");
+        Assert.assertTrue(driver.findElement(By.cssSelector("select[name='DateOfBirthYear']>option[value='1995']")).isSelected());
+        sleepSeconds(3);
+
+    }
     @AfterClass
     public void afterClass() {
         driver.quit();
@@ -71,6 +137,21 @@ public class Topic_10_Custom_Dropdown {
         for (WebElement item: allItem){
             String textItem = item.getText();
           //  System.out.println("Text item = " + textItem);
+            if (textItem.equals(iTemTextExpected)){
+                item.click();
+                break;
+            }
+        }
+    }
+
+    public void selectItemInEditableDropdown(String parentCss, String childItemCss, String iTemTextExpected){
+        driver.findElement(By.cssSelector(parentCss)).click();
+        sleepSeconds(3);
+        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childItemCss)));
+        List<WebElement> allItem = driver.findElements(By.cssSelector(childItemCss));
+        for (WebElement item: allItem){
+            String textItem = item.getText();
+            //  System.out.println("Text item = " + textItem);
             if (textItem.equals(iTemTextExpected)){
                 item.click();
                 break;
