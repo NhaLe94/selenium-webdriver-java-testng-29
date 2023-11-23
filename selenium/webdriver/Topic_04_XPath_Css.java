@@ -87,7 +87,6 @@ public class Topic_04_XPath_Css {
         Assert.assertEquals(driver.findElement(By.id("txtCPassword-error")).getText(), "Mật khẩu phải có ít nhất 6 ký tự");
 
     }
-
     @Test(priority = 3)
     public void Register_04_Invalid_Confirm_Password() {
         driver.get("https://alada.vn/tai-khoan/dang-ky.html");
@@ -116,6 +115,8 @@ public class Topic_04_XPath_Css {
         driver.findElement(By.id("txtCPassword")).sendKeys("123456");
         driver.findElement(By.id("txtPhone")).sendKeys("098765432");
         driver.findElement(By.xpath("//button[text()='ĐĂNG KÝ' and @type='submit']")).click();
+        ////button[text()='ĐĂNG KÝ' and @type='submit']"
+        // //button[text()='Login' and @type='submit']
 
         // verify
         Assert.assertEquals(driver.findElement(By.id("txtPhone-error")).getText(), "Số điện thoại phải từ 10-11 số.");

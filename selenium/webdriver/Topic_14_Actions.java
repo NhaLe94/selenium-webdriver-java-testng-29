@@ -1,18 +1,20 @@
 package webdriver;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_01_Check_Environment {
+import java.util.concurrent.TimeUnit;
+
+public class Topic_14_Actions {
     WebDriver driver;
+    Actions actions;
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");
 
@@ -25,25 +27,29 @@ public class Topic_01_Check_Environment {
         }
 
         driver = new FirefoxDriver();
+        actions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
     }
 
     @Test
-    public void TC_01_Url() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.facebook.com/");
-    }
+    public void TC01_Hover_Tooltip(){
+        driver.get("https://automationfc.github.io/jquery-tooltip/");
+        WebElement ageTextbox = driver.findElement(By.cssSelector("input#age"));
 
-    @Test
-    public void TC_02_Logo() {
-        Assert.assertTrue(driver.findElement(By.cssSelector("img.fb_logo")).isDisplayed());
-    }
+        actions.moveToElement(ageTextbox).perform();
+        sleepSeconds(2);
 
+    }
     @Test
-    public void TC_03_Form() {
-        Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
+    public void TC02_Hover_Menu()
+    {
+        driver.get("https://www.fahasa.com/");
+        actions.moveToElement(driver.findElement(By.cssSelector("span.icon_menu"))).perform();
+        sleepSeconds(2);
+        actions.moveToElement(driver.findElement(By.xpath("//a[@title='Bách Hóa Online - Lưu Niệm']"))).perform();
+        sleepSeconds(2);
+
     }
 
     @AfterClass

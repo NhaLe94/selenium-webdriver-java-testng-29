@@ -1,17 +1,16 @@
 package webdriver;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_01_Check_Environment {
+import java.util.concurrent.TimeUnit;
+
+public class Topic_15_Popup {
     WebDriver driver;
     String projectPath = System.getProperty("user.dir");
     String osName = System.getProperty("os.name");
@@ -27,13 +26,30 @@ public class Topic_01_Check_Environment {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
     }
 
     @Test
-    public void TC_01_Url() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://www.facebook.com/");
+    public void TC_01_Fixed_Popup_In_Dom_01() {
+        driver.get("https://ngoaingu24h.vn/");
+        driver.findElement(By.cssSelector("button.login_")).click();
+        sleepSeconds(2);
+        By loginPopup = By.cssSelector("div[id='modal-login-v1'][style]>div");
+        //kt login popup đang hiển thị
+        Assert.assertTrue(driver.findElement(loginPopup).isDisplayed());
+
+        driver.findElement(By.cssSelector("div[id='modal-login-v1'][style] input#account-input")).sendKeys("Testing");
+        driver.findElement(By.cssSelector("div[id='modal-login-v1'][style] input#password-input")).sendKeys("Testing");
+        driver.findElement(By.cssSelector("div[id='modal-login-v1'][style] button.btn-login-v1")).click();
+        sleepSeconds(2);
+
+        Assert.assertEquals(driver.findElement(By.cssSelector("div[id='modal-login-v1'][style] div.error-login-panel")).getText(),"Tài khoản không tồn tại!");
+        //close popup
+        driver.findElement(By.cssSelector("div[id='modal-login-v1'][style] button.close")).click();
+        sleepSeconds(2);
+
+        // kt popup k hien thi
+        Assert.assertFalse(driver.findElement(loginPopup).isDisplayed());
+
     }
 
     @Test

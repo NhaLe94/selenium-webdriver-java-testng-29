@@ -80,8 +80,6 @@ public class Topic_13_Alert {
         driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
         Assert.assertTrue(driver.findElement(By.xpath("//p[contains(text(),'Congratulations! You must have the proper credentials')]")).isDisplayed());
 
-
-
     }
 
     @AfterClass
