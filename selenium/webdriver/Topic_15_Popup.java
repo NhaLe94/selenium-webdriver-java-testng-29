@@ -29,7 +29,7 @@ public class Topic_15_Popup {
     }
 
     @Test
-    public void TC_01_Fixed_Popup_In_Dom_01() {
+    public void TC_01_Fixed_Popup_In_Dom() {
         driver.get("https://ngoaingu24h.vn/");
         driver.findElement(By.cssSelector("button.login_")).click();
         sleepSeconds(2);
@@ -53,13 +53,30 @@ public class Topic_15_Popup {
     }
 
     @Test
-    public void TC_02_Logo() {
-        Assert.assertTrue(driver.findElement(By.cssSelector("img.fb_logo")).isDisplayed());
+    public void TC_02_Fixed_Popup_In_Dom() {
+        driver.get("https://skills.kynaenglish.vn/");
+        driver.findElement(By.cssSelector("a.login-btn")).click();
+        sleepSeconds(2);
+        Assert.assertTrue(driver.findElement(By.cssSelector("div#k-popup-account-login-mb div.modal-content")).isDisplayed());
+        System.out.print("Popup k hiển thị " +driver.findElement(By.cssSelector("div#k-popup-account-login-mb div.modal-content")).isDisplayed());
+
+        driver.findElement(By.cssSelector("input#user-login")).sendKeys("testing");
+        driver.findElement(By.cssSelector("input#user-password")).sendKeys("testing");
+        driver.findElement(By.cssSelector("button#btn-submit-login")).click();
+        sleepSeconds(2);
+
+        Assert.assertEquals(driver.findElement(By.cssSelector("div#password-form-login-message")).getText(), "Sai tên đăng nhập hoặc mật khẩu");
+        driver.findElement(By.cssSelector("button.k-popup-account-close")).click();
+        sleepSeconds(2);
+
+        Assert.assertFalse(driver.findElement(By.cssSelector("div#k-popup-account-login-mb div.modal-content")).isDisplayed());
+        System.out.print("Popup k hiển thị " +driver.findElement(By.cssSelector("div#k-popup-account-login-mb div.modal-content")).isDisplayed());
+
     }
 
     @Test
     public void TC_03_Form() {
-        Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
+
     }
 
     @AfterClass
