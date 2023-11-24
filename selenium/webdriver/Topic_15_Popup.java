@@ -75,7 +75,25 @@ public class Topic_15_Popup {
     }
 
     @Test
-    public void TC_03_Form() {
+    public void TC_03_Fixed_Popup_Not_In_Dom() {
+        driver.get("https://tiki.vn/");
+        driver.findElement(By.cssSelector("div[data-view-id='header_header_account_container'")).click();
+        sleepSeconds(2);
+        //kt popup hien thi
+        Assert.assertTrue(driver.findElement(By.cssSelector("div.ReactModal__Content")).isDisplayed());
+        driver.findElement(By.cssSelector("p.login-with-email")).click();
+        driver.findElement(By.cssSelector("//button[text()='Đăng nhập']")).click();
+        Assert.assertEquals(driver.findElement(By.xpath("//input[@type='email']/parent::div/following-sibling::span[1]")).getText(), "Email không được để trống");
+        Assert.assertEquals(driver.findElement(By.xpath("//input[@type='password']/parent::div/following-sibling::span[2]")).getText(), "Mật khẩu không được để trống");
+    // đóng close
+        driver.findElement(By.cssSelector("img.close")).click();
+        sleepSeconds(2);
+        //khi popup đóng lại thi html k còn trong dom
+
+
+
+
+
 
     }
 
