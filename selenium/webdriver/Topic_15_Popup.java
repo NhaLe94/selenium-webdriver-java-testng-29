@@ -82,18 +82,15 @@ public class Topic_15_Popup {
         //kt popup hien thi
         Assert.assertTrue(driver.findElement(By.cssSelector("div.ReactModal__Content")).isDisplayed());
         driver.findElement(By.cssSelector("p.login-with-email")).click();
-        driver.findElement(By.cssSelector("//button[text()='Đăng nhập']")).click();
+        driver.findElement(By.xpath("//button[text()='Đăng nhập']")).click();
         Assert.assertEquals(driver.findElement(By.xpath("//input[@type='email']/parent::div/following-sibling::span[1]")).getText(), "Email không được để trống");
-        Assert.assertEquals(driver.findElement(By.xpath("//input[@type='password']/parent::div/following-sibling::span[2]")).getText(), "Mật khẩu không được để trống");
+        Assert.assertEquals(driver.findElement(By.xpath("//input[@type='password']/parent::div/following-sibling::span")).getText(), "Mật khẩu không được để trống");
     // đóng close
-        driver.findElement(By.cssSelector("img.close")).click();
+        driver.findElement(By.cssSelector("img.close-img")).click();
         sleepSeconds(2);
         //khi popup đóng lại thi html k còn trong dom
 
-
-
-
-
+        Assert.assertEquals(driver.findElements(By.cssSelector("div.ReactModal__Content")).size(), 0);
 
     }
 
