@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class Topic_15_Popup {
@@ -90,8 +91,19 @@ public class Topic_15_Popup {
         sleepSeconds(2);
         //khi popup đóng lại thi html k còn trong dom
 
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Assert.assertEquals(driver.findElements(By.cssSelector("div.ReactModal__Content")).size(), 0);
 
+    }
+    @Test
+    public void TC_04_Fixed_Popup_Not_In_DOM(){
+        driver.get("https://www.facebook.com/");
+        driver.findElement(By.cssSelector("a[data-testid='open-registration-form-button']")).click();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Sign Up']/parent::div/parent::div")).isDisplayed());
+        driver.findElement(By.xpath("//div[text()='Sign Up']/parent::div/preceding-sibling::img")).click();
+        sleepSeconds(2);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Assert.assertEquals(driver.findElements(By.xpath("//div[text()='Sign Up']/parent::div/parent::div")).size(), 0);
     }
 
     @AfterClass
