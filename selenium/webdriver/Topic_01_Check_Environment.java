@@ -45,6 +45,16 @@ public class Topic_01_Check_Environment {
     public void TC_03_Form() {
         Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
     }
+    @Test
+    public void TC_04_Tiki(){
+        driver.get("https://tiki.vn/");
+    }
+    @Test
+    public void TC_05_Select_Item(){
+        driver.findElement(By.xpath("//a[starts-with(@title,'Nhà Sách')]")).click();
+        sleepSeconds(5);
+    }
+
 
     @AfterClass
     public void afterClass() {
