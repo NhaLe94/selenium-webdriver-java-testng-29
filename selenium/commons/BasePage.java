@@ -85,6 +85,9 @@ public class BasePage {
     public List<WebElement> getListElement(WebDriver driver, String locator){
         return driver.findElements(By.xpath(locator));
     }
+    public By getByXpath(String locator){
+        return By.xpath(locator);
+    }
     public void clickToElement(WebDriver driver, String locator){
         getElement(driver, locator).click();
     }
@@ -181,4 +184,21 @@ public class BasePage {
     public void pressKeyToElement(WebDriver driver, String locator, Keys keys){
         new Actions(driver).sendKeys(getElement(driver, locator), keys).perform();
     }
+    public void waitForElementVisible(WebDriver driver, String locator){
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(getByXpath(locator)));
+    }
+    public void waitForElementPresence(WebDriver driver, String locator){
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByXpath(locator)));
+    }
+    public void waitForElementInvisible(WebDriver driver, String locator){
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.invisibilityOfElementLocated(getByXpath(locator)));
+    }
+    public void waitForElementClickable(WebDriver driver, String locator){
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
+    }
+
+
+
+
+
 }
