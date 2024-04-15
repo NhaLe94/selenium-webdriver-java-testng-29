@@ -28,7 +28,6 @@ public class Topic_01_Check_Environment {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("https://www.facebook.com/");
-        driver.manage().window().maximize();
     }
 
     @Test
@@ -46,14 +45,27 @@ public class Topic_01_Check_Environment {
         Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
     }
     @Test
-    public void TC_04_Tiki(){
-        driver.get("https://tiki.vn/");
+    public void TC_04_Sign_In() {
+        driver.get("https://developer.salesforce.com/signup");
+        driver.findElement(By.cssSelector("input#email"));
+        
     }
+
+
+
     @Test
     public void TC_05_Select_Item(){
         driver.findElement(By.xpath("//a[starts-with(@title,'Nhà Sách')]")).click();
         sleepSeconds(5);
-        driver.findElement(By.xpath("//div[@class='list collapsed']//child::a[1]"));
+       // Assert.assertEquals(driver.findElement(By.xpath("//div[contains(@class,'styles__Right')]//descendant::h2")).getText(), "Nhà Sách Tiki");
+
+
+       // driver.findElement(By.xpath("//div[@class='list collapsed']//child::a[1]"));
+
+    }
+    @Test
+    public void TC_04_Tiki(){
+        driver.get("https://tiki.vn/");
     }
 
 
