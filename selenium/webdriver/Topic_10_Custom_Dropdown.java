@@ -3,6 +3,7 @@ package webdriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,13 +26,13 @@ public class Topic_10_Custom_Dropdown {
     public void beforeClass() {
 
         if (osName.contains("Windows")) {
-            System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+            System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
         } else {
-            System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver");
+            System.setProperty("webdriver.chrome.driver", projectPath + "/browserDrivers/chromedriver");
         }
 
-        driver = new FirefoxDriver();
-        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        driver = new ChromeDriver();
+        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(15));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
     }
@@ -118,6 +119,7 @@ public class Topic_10_Custom_Dropdown {
         sleepSeconds(3);
 
     }
+
     @AfterClass
     public void afterClass() {
         driver.quit();

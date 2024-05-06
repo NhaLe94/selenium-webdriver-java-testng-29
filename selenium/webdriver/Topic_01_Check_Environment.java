@@ -57,10 +57,6 @@ public class Topic_01_Check_Environment {
     public void TC_05_Select_Item(){
         driver.findElement(By.xpath("//a[starts-with(@title,'Nhà Sách')]")).click();
         sleepSeconds(5);
-       // Assert.assertEquals(driver.findElement(By.xpath("//div[contains(@class,'styles__Right')]//descendant::h2")).getText(), "Nhà Sách Tiki");
-
-
-       // driver.findElement(By.xpath("//div[@class='list collapsed']//child::a[1]"));
 
     }
     @Test
